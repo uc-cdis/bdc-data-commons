@@ -1,5 +1,5 @@
 {
-  "name": "@gen3/commons-portal-app-base",
+  "name": "@gen3/bdc-data-commons",
   "version": "0.10.55",
   "private": "true",
   "engines": {
