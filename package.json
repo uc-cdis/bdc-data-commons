@@ -21,7 +21,7 @@
     "@fontsource/montserrat": "^5.0.19",
     "@fontsource/source-sans-pro": "^5.0.8",
     "@fontsource/poppins": "^5.0.15",
-    "@gen3/frontend": "^0.10.44",
+    "@gen3/frontend": "^0.10.57",
     "@mantine/core": "^7.12.1",
     "@mantine/form": "^7.12.1",
     "@mantine/hooks": "^7.12.1",
