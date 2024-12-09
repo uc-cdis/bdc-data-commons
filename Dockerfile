@@ -30,7 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && npm install -g npm@10.5.2
 
 RUN  addgroup --system --gid 1001 nextjs && adduser --system --uid 1001 nextjs
-COPY ./package.json ./package-lock.json ./next.config.js ./tsconfig.json ./.env.development  ./tailwind.config.js ./postcss.config.js  ./start.sh ./
+COPY ./package.json ./package-lock.json ./next.config.js ./tsconfig.json ./tailwind.config.js ./postcss.config.js ./start.sh ./
 COPY ./src ./src
 COPY ./public ./public
 COPY ./config ./config
