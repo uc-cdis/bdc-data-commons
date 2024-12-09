@@ -1,17 +1,18 @@
 /** @type {import('tailwindcss').Config} */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { GEN3_COMMONS_NAME } = require('@gen3/core');
+
 const plugin = require('tailwindcss/plugin');
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { GEN3_COMMONS_NAME } = require('@gen3/core');
 const themeColors = require(`./config/${GEN3_COMMONS_NAME}/themeColors.json`);
 const themeFonts = require(`./config/${GEN3_COMMONS_NAME}/themeFonts.json`);
 
 module.exports = {
-  // important: '#__next', // Uncommenting this affects tailwind styling in Modals
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
     './src/features/**/*.{js,ts,jsx,tsx}',
-    '../frontend/dist/**/index.js',
+    './node_modules/@gen3/frontend/dist/esm/index.js',
   ],
   theme: {
     extend: {
