@@ -39,5 +39,5 @@ RUN npm install \
     "@swc/core" \
     "@napi-rs/magic-string"
 RUN npm run build
-ENV PORT=80
+ENV PORT=3000
 CMD ["npm", "run", "start"]
