@@ -32,7 +32,7 @@ const nextConfig = {
   },
   pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
   transpilePackages: ['@gen3/frontend'],
-  basePath: basePath,
+  basePath: '/ff',
   webpack: (config) => {
     config.infrastructureLogging = {
       level: 'error',
