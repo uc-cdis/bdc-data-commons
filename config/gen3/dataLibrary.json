@@ -30,7 +30,7 @@
     },
     {
       "id": "exportTo7Bridges",
-      "label": "Export to Seven Bridges",
+      "label": "Export to Seven Bridgese34",
       "rightIcon" : "gen3:send",
       "buttonLabel" : "Export",
       "actionFunction" : "export-pfb-to-url",

@@ -5,6 +5,7 @@
       "height": 370,
       "width": 460,
       "href": "/",
+      "noBasePath" : true,
       "classNames": {
         "root": "py-0"
       }
