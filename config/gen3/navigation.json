@@ -73,28 +73,11 @@
   },
   "topBar": {
     "items": [
-      {
-        "icon": "upload",
-        "link": "/submission",
-        "name": "Submit Data",
-        "classNames" : {
-          "root" : "border-white",
-          "button" : "hover:border-white"
-        }
-      },
-      {
-        "link": "https://bdcatalyst.gitbook.io/biodata-catalyst-documentation/explore_data/gen3-discovering-data",
-        "name": "Documentation",
-        "classNames" : {
-          "root" : "border-white",
-          "button" : "hover:border-white"
-        }
-      }
     ],
     "classNames": {
       "root": "flex justify-end items-center align-middle w-100 bg-secondary text-secondary-contrast",
       "login" : "hover:border-white"
     },
-    "loginButtonVisibility": "visible"
+    "loginButtonVisibility": "hide"
   }
 }
