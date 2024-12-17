@@ -24,7 +24,7 @@
           "operator": "count",
           "value": "GA4GH_DRS",
           "total": 1,
-          "errorMessage": "only 1 GA4GH_DRS can be selected"
+          "errorMessage": "Only 1 GA4GH_DRS can be selected"
         }
       ]
     },

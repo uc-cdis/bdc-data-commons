@@ -36,7 +36,7 @@
       },
       {
         "icon": "gen3:dictionary",
-        "href": "/DataDictionary",
+        "href": "/DD",
         "noBasePath": true,
         "name": "Dictionary",
         "tooltip": "The Data Dictionary serves to inform the data model and is updated as new data is ingested.",
@@ -59,7 +59,7 @@
       },
       {
         "icon": "gen3:profile",
-        "href": "/Profile",
+        "href": "/identity",
         "noBasePath": true,
         "name": "Profile",
         "tooltip": "Create API keys for programmatic data access, and review your authorization privileges to datasets and services.",
@@ -73,6 +73,10 @@
   },
   "topBar": {
     "items": [
+      {
+        "href": "https://bdcatalyst.gitbook.io/biodata-catalyst-documentation/explore_data/gen3-discovering-data",
+        "name": "Documentation"
+      }
     ],
     "classNames": {
       "root": "flex justify-end items-center align-middle w-100 bg-secondary text-secondary-contrast",
