@@ -17,6 +17,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        footer: '#373A3C',
         heal: {
           primary: '#99286B',
           secondary: '#402264',
@@ -63,6 +64,8 @@ module.exports = {
         content: themeFonts.content,
       },
       fontSize: {
+        xxxs: '0.4rem',
+        xxs: '0.5rem',
         tiny: '0.625rem',
       },
       borderWidth: {
@@ -74,6 +77,10 @@ module.exports = {
         4: '4px',
         6: '6px',
         8: '8px',
+      },
+      height: {
+        '100px': '100px',
+        '200px': '200px',
       },
     },
   },
@@ -96,6 +103,15 @@ module.exports = {
       addVariant('api-in-range', '&[api-in-range]');
       addVariant('api-first-in-range', '&[api-first-in-range]');
       addVariant('api-last-in-range', '&[api-last-in-range]');
+      addVariant('data-checked', '&[data-checked]');
+      addVariant('data-active', '&[data-active]');
+      addVariant('data-selected', '&[data-selected]');
+      addVariant('data-hovered', '&[data-hovered]');
+      addVariant('data-disabled', '&[data-disabled]');
+      addVariant('data-in-range', '&[data-in-range]');
+      addVariant('data-first-in-range', '&[data-first-in-range]');
+      addVariant('data-last-in-range', '&[data-last-in-range]');
+      addVariant('data-with-icon', '&[data-with-icon]');
     }),
     plugin(function ({ addUtilities }) {
       const newUtilities = {
@@ -155,4 +171,6 @@ module.exports = {
       });
     }),
   ],
+  // Add any colors. fontSize, height used in a json config file here
+  safelist: ['text-tiny', 'text-xxs', 'text-xxxs', 'h-20'],
 };
