@@ -3,6 +3,8 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const dns = require('dns');
 
+const basePath = process.env.NEXT_PUBLIC_BASEPATH;
+
 dns.setDefaultResultOrder('ipv4first');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -17,28 +19,52 @@ const withMDX = require('@next/mdx')({
   },
 });
 
-
-// Next configuration with support for rewrting API to existing common services
+// Next configuration with support for rewriting API to existing common services
 const nextConfig = {
-  output: 'standalone',
   reactStrictMode: true,
+  experimental: {
+    esmExternals: true,
+    instrumentationHook: true,
+    optimizePackageImports: ['@gen3/frontend', '@gen3/core'],
+    turbo: {
+      moduleIdStrategy: 'deterministic',
+    },
+  },
   pageExtensions: ['mdx', 'md', 'jsx', 'js', 'tsx', 'ts'],
-  basePath: process.env.BASE_PATH || '',
-  transpilePackages: ['@gen3/core', '@gen3/frontend'],
+  transpilePackages: ['@gen3/frontend'],
+  basePath: '/ff',
   webpack: (config) => {
     config.infrastructureLogging = {
-      level: "error",
+      level: 'error',
     };
+
     return config;
   },
   async headers() {
     return [
       {
-        source: "/(.*)?", // Matches all pages
+        source: '/(.*)?', // Matches all pages
         headers: [
           {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+        ],
+      },
+      {
+        source: '/jupyter/(.*)?',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'Cross-Origin-Embedder-Policy',
+            value: 'require-corp',
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin',
           },
         ],
       },

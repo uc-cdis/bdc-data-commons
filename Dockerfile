@@ -6,9 +6,8 @@
 FROM quay.io/cdis/ubuntu:20.04 AS build
 
 ARG NODE_VERSION=20
+ARG NEXT_PUBLIC_PORTAL_BASENAME=/ff
 
-ARG BASE_PATH
-ARG NEXT_PUBLIC_PORTAL_BASENAME
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
 ENV PATH=$PATH:/home/node/.npm-global/bin
 
@@ -31,21 +30,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && npm install -g npm@10.5.2
 
 RUN  addgroup --system --gid 1001 nextjs && adduser --system --uid 1001 nextjs
-COPY ./package.json ./package-lock.json ./
-COPY ./package-lock.json ./
+COPY ./package.json ./package-lock.json ./next.config.js ./tsconfig.json ./tailwind.config.js ./postcss.config.js ./start.sh ./
 COPY ./src ./src
 COPY ./public ./public
 COPY ./config ./config
-COPY ./next.config.js ./
-COPY ./tsconfig.json ./
-COPY ./.env.development ./
-COPY ./.env.production ./
-COPY ./tailwind.config.js ./
-COPY ./postcss.config.js ./
 RUN npm ci
 RUN npm install \
     "@swc/core" \
     "@napi-rs/magic-string"
 RUN npm run build
-ENV PORT=80
-CMD ["npm", "run", "start"]
+ENV PORT=3000
+CMD bash ./start.sh
