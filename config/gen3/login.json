@@ -16,8 +16,10 @@
   "bottomContent": [
     {
       "text": "If you have any questions about access or the registration process, please contact",
-      "email": "https://biodatacatalyst.nhlbi.nih.gov/contact",
-      "className": "text-center text-sm"
+      "link": "https://biodatacatalyst.nhlbi.nih.gov/contact",
+      "linkText" : "biodatacatalyst.nhlbi.nih.gov/contact",
+      "className": "text-center text-sm",
+      "type": "textWithLink"
     }
   ],
   "image": "images/gene_side_texture.svg",
