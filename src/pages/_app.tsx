@@ -14,7 +14,6 @@ import {
   createMantineTheme,
   SessionConfiguration,
   // registerCohortDiscoveryApp,
-  registerCohortDiversityApp,
   registerCohortBuilderDefaultPreviewRenderers,
   registerMetadataSchemaApp,
 } from '@gen3/frontend';
@@ -72,7 +71,6 @@ const Gen3App = ({
     // ) {
     if (!faroRef.current) faroRef.current = initGrafanaFaro();
     //  registerCohortDiscoveryApp();
-    registerCohortDiversityApp();
     registerMetadataSchemaApp();
     registerCohortBuilderDefaultPreviewRenderers();
     registerCohortTableCustomCellRenderers();

@@ -82,6 +82,7 @@
       "root": "flex justify-end items-center align-middle w-100 bg-secondary text-secondary-contrast",
       "login" : "hover:border-white"
     },
-    "loginButtonVisibility": "hide"
+    "loginButtonVisibility": "visible",
+    "externalLoginUrl": "https://gen3.biodatacatalyst.nhlbi.nih.gov/login"
   }
 }
