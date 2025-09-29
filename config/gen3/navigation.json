@@ -12,17 +12,6 @@
     },
     "items": [
       {
-        "icon": "gen3:exploration",
-        "href": "/explorer",
-        "noBasePath": true,
-        "name": "Exploration",
-        "classNames": {
-          "root": "flex flex-col border-b-4 border-base-max hover:border-accent flex-nowrap py-4 pt-4 items-center pr-10 px-2",
-          "label": "text-black font-semibold  ",
-          "icon": "text-black"
-        }
-      },
-      {
         "icon": "gen3:query",
         "href": "/discovery",
         "noBasePath": true,
@@ -40,6 +29,17 @@
         "noBasePath": true,
         "name": "Dictionary",
         "tooltip": "The Data Dictionary serves to inform the data model and is updated as new data is ingested.",
+        "classNames": {
+          "root": "flex flex-col border-b-4 border-base-max hover:border-accent flex-nowrap py-4 pt-4 items-center pr-10 px-2",
+          "label": "text-black font-semibold  ",
+          "icon": "text-black"
+        }
+      },
+      {
+        "icon": "gen3:exploration",
+        "href": "/explorer",
+        "noBasePath": true,
+        "name": "Exploration",
         "classNames": {
           "root": "flex flex-col border-b-4 border-base-max hover:border-accent flex-nowrap py-4 pt-4 items-center pr-10 px-2",
           "label": "text-black font-semibold  ",
