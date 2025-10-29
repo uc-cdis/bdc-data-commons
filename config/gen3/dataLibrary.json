@@ -1,5 +1,5 @@
 {
-  "useAPI": true,
+  "useAPI": false,
   "actions": [
     {
       "id": "exportTerra",
@@ -8,7 +8,7 @@
       "buttonLabel" : "Export",
       "actionFunction" : "export-pfb-to-url",
       "parameters" : {
-        "targetURLTemplate" : "https://terra.biodatacatalyst.nhlbi.nih.gov/#import-data?format=PFB&template=bdc&template=gen3&url={{PRESIGNED_URL}}"
+        "targetURLTemplate" : "https://platform.sb.biodatacatalyst.nhlbi.nih.gov/import/pfb?URL={{PRESIGNED_URL}}&source=bdc"
       },
       "itemRules": [
         {
