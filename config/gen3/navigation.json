@@ -25,7 +25,7 @@
       },
       {
         "icon": "gen3:dictionary",
-        "href": "/DD",
+        "href": "/DataDictionary",
         "noBasePath": true,
         "name": "Dictionary",
         "tooltip": "The Data Dictionary serves to inform the data model and is updated as new data is ingested.",
@@ -37,7 +37,7 @@
       },
       {
         "icon": "gen3:exploration",
-        "href": "/explorer",
+        "href": "/Explorer",
         "noBasePath": true,
         "name": "Exploration",
         "classNames": {
@@ -59,7 +59,7 @@
       },
       {
         "icon": "gen3:profile",
-        "href": "/identity",
+        "href": "/Profile",
         "noBasePath": true,
         "name": "Profile",
         "tooltip": "Create API keys for programmatic data access, and review your authorization privileges to datasets and services.",
