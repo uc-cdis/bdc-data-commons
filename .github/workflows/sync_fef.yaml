@@ -11,4 +11,4 @@ on:
   push: # temp for testing
 jobs:
   sync:
-    uses: uc-cdis/.github/.github/workflows/gen3_Sync_FeF.yaml@paulineribeyre-patch-1
+    uses: uc-cdis/.github/.github/workflows/gen3_Sync_FeF.yaml@kyle-fef-sync-test
