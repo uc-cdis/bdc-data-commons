@@ -1,5 +1,5 @@
 {
-  "hasExternalLogins" : true,
+  "hasExternalLogins" : false,
   "resourceTable": {
     "serviceColors": {
       "guppy": {

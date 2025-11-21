@@ -6,85 +6,70 @@
         "expandableRows": true
       },
       "features": {
-        "advSearchFilters": {
-          "enabled": false,
-          "field": "advSearchFilters",
-          "displayName": "Filters",
-          "filters": [
-            {
-              "key": "Study Type"
-            },
-            {
-              "key": "Data Type"
-            },
-            {
-              "key": "Subject Type"
-            },
-            {
-              "key": "Gender"
-            },
-            {
-              "key": "Age"
-            }
-          ]
-        },
-        "tagsColumn": {
-          "enabled": false
+        "pageTitle": {
+          "enabled": true,
+          "title": "Discover Datasets"
         },
         "tagsInDescription": {
           "enabled": true
         },
         "exportToWorkspace": {
-          "enabled": true,
-          "manifestFieldName": "__manifest",
-          "enableDownloadManifest": true,
-          "enableDownloadZip": true,
-          "downloadZipButtonText": "Download Zip",
-          "downloadManifestButtonText": "Download Manifest",
-          "documentationLinks": {
-            "gen3Client": "https://gen3.org/resources/user/gen3-client/",
-            "gen3Workspaces": "https://gen3.org/resources/user/analyze-data/"
-          },
-          "verifyExternalLogins": true
+          "enabled": false
         },
-        "pageTitle": {
-          "enabled": true,
-          "title": "Discover Datasets"
+        "exportFromDiscovery" : {
+          "enabled" : "true",
+          "exportDataFields" : {
+            "dataObjectField" : "objects",
+            "datasetIdField" : "study_id",
+            "dataObjectIdField" : "guid"
+          },
+          "buttons": [
+            {
+              "type" : "addToDataLibrary"
+            }
+          ]
         },
         "search": {
           "searchBar": {
             "enabled": true,
             "inputSubtitle": "Search studies by keywords",
             "searchableTextFields": [
+              "name",
+              "full_name",
+              "_subjects_count",
+              "study_id",
+              "released",
               "study_description",
-              "_unique_id",
-              "full_name"
+              "doi_titles",
+              "doi_version_information",
+              "doi_citation",
+              "doi_creators",
+              "doi_publisher",
+              "doi_identifier",
+              "doi_alternateIdentifiers",
+              "doi_contributors",
+              "doi_descriptions",
+              "doi_publication_year",
+              "doi_resolvable_link",
+              "doi_fundingReferences",
+              "doi_relatedIdentifiers"
             ]
           },
           "tagSearchDropdown": {
             "enabled": true,
-            "collapsibleButtonText": "Data Repository"
+            "collapsibleButtonText": "Study Filters"
           }
         },
         "authorization": {
           "enabled": true,
-          "columnTooltip": "Filter by data access",
           "supportedValues": {
             "accessible": {
               "enabled": true,
-              "menuText": "Available"
+              "menuText": "Accessible"
             },
             "unaccessible": {
-              "enabled": false,
+              "enabled": true,
               "menuText": "Not Accessible"
-            },
-            "pending": {
-              "enabled": true,
-              "menuText": "Pending"
-            },
-            "notAvailable": {
-              "enabled": true,
-              "menuText": "Not Available"
             }
           }
         }
@@ -92,111 +77,90 @@
       "aggregations": [
         {
           "name": "Studies",
-          "field": "_unique_id",
+          "field": "study_id",
           "type": "count"
+        },
+        {
+          "name": "Total Subjects",
+          "field": "_subjects_count",
+          "type": "sum"
         }
       ],
       "tagSelector": {
+        "title": "Tags by category",
         "showTagCategoryNames": true
       },
-      "studies": [],
       "studyColumns": [
         {
-          "name": "Study ID",
-          "field": "_unique_id",
-          "contentType": "string",
-          "errorIfNotAvailable": false,
-          "valueIfNotAvailable": "n/a"
-        },
-        {
           "name": "Study Name",
+          "field": "name"
+        },
+        {
+          "name": "Full Name",
           "field": "full_name",
-          "contentType": "string",
           "errorIfNotAvailable": false,
-          "valueIfNotAvailable": "n/a"
+          "valueIfNotAvailable": "",
+          "contentType": "string"
         },
         {
-          "name": "Study Title",
-          "field": "study_title",
-          "contentType": "string",
+          "name": "Number of Subjects",
+          "field": "_subjects_count",
           "errorIfNotAvailable": false,
-          "valueIfNotAvailable": "n/a"
+          "valueIfNotAvailable": "n/a",
+          "contentType": "number"
         },
         {
-          "name": "Source",
-          "field": "source",
-          "contentType": "string",
-          "errorIfNotAvailable": false,
-          "valueIfNotAvailable": "n/a"
+          "name": "dbGaP Accession Number",
+          "field": "study_id"
         },
         {
-          "name": "Data Files",
-          "field": "__manifest",
-          "contentType": "manifest",
-          "errorIfNotAvailable": false,
-          "valueIfNotAvailable": "n/a"
-        },
-        {
-          "name": "Subjects",
-          "field": "subjects_count",
-          "contentType": "string",
+          "name": "Released",
+          "field": "released",
           "errorIfNotAvailable": false,
           "valueIfNotAvailable": "n/a"
         }
       ],
       "studyPreviewField": {
-        "name": "Study Description",
+        "name": "Description",
         "field": "study_description",
         "contentType": "string",
-        "includeName": true,
-        "includeIfNotAvailable": false,
-        "valueIfNotAvailable": "No summary has been provided for this study."
+        "includeName": false,
+        "includeIfNotAvailable": true,
+        "valueIfNotAvailable": "No description has been provided for this study."
       },
-      "simpleDetailsView": {
+      "studyPageFields": {
+        "showAllAvailableFields": false,
         "header": {
-          "field": "study_title"
-        },
-        "downloadLinks": {
-          "field": "data_download_links"
+          "field": "name"
         },
         "fieldsToShow": [
           {
-            "groupWidth": "half",
+            "groupName": "Study Identifiers",
+            "includeName": false,
             "fields": [
               {
-                "name": "Study Name",
+                "name": "Number of Subjects",
+                "field": "_subjects_count",
+                "contentType": "number"
+              },
+              {
+                "name": "Full Name",
                 "field": "full_name",
-                "contentType": "string",
-                "includeIfNotAvailable": false
+                "contentType": "string"
               },
               {
-                "name": "Study Title",
-                "field": "study_title",
+                "name": "Short Name",
+                "field": "short_name",
                 "contentType": "string",
-                "includeIfNotAvailable": false
+                "includeName": true,
+                "includeIfNotAvailable": true,
+                "valueIfNotAvailable": "N/A"
               },
               {
-                "name": "Funding",
-                "field": "funding",
+                "name": "dbGaP Study Accession",
+                "field": "dbgap_accession",
                 "contentType": "string",
-                "includeIfNotAvailable": false
-              },
-              {
-                "name": "Source",
-                "field": "source",
-                "contentType": "string",
-                "includeIfNotAvailable": false
-              },
-              {
-                "name": "Data Files",
-                "field": "data_files_count",
-                "contentType": "string",
-                "includeIfNotAvailable": false
-              },
-              {
-                "name": "Subjects",
-                "field": "subjects_count",
-                "contentType": "string",
+                "includeName": true,
                 "includeIfNotAvailable": false
               },
               {
@@ -204,24 +168,399 @@
                 "field": "project_id",
                 "contentType": "string",
                 "includeIfNotAvailable": false
-              },
-              {
-                "name": "Link",
-                "field": "link",
-                "contentType": "link",
-                "includeIfNotAvailable": false
               }
             ]
           },
           {
-            "groupWidth": "half",
             "fields": [
               {
-                "name": "Study Description",
+                "name": "Description",
                 "field": "study_description",
-                "contentType": "paragraph",
-                "includeIfNotAvailable": false,
-                "valueIfNotAvailable": "No summary has been provided for this study."
+                "contentType": "paragraphs",
+                "includeName": false,
+                "includeIfNotAvailable": true,
+                "valueIfNotAvailable": "No description has been provided for this study."
+              }
+            ]
+          }
+        ]
+      },
+      "detailView": {
+        "headerField": "project_id",
+        "tabs": [
+          {
+            "tabName": "DOI",
+            "groups": [
+              {
+                "header": "Dataset Information",
+                "fields": [
+                  {
+                    "type": "block",
+                    "sourceField": "doi_disclaimer"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Title:",
+                    "sourceField": "doi_titles",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "link",
+                    "label": "DOI:",
+                    "sourceField": "doi_resolvable_link",
+                    "default": "None"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Data available:",
+                    "sourceField": "doi_is_available",
+                    "default": "None"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Creators:",
+                    "sourceField": "doi_creators",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Citation:",
+                    "sourceField": "doi_citation",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "link",
+                    "label": "Contact:",
+                    "sourceField": "doi_contact",
+                    "default": "Not specified"
+                  }
+                ]
+              },
+              {
+                "header": "How to Access the Data",
+                "fields": [
+                  {
+                    "type": "block",
+                    "label": "How to access the data:",
+                    "sourceField": "doi_access_information",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "link",
+                    "label": "Data and access information:",
+                    "sourceField": "doi_access_information_link",
+                    "default": "Not specified"
+                  }
+                ]
+              },
+              {
+                "header": "Additional Information",
+                "fields": [
+                  {
+                    "type": "text",
+                    "label": "Publisher:",
+                    "sourceField": "doi_publisher",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Funded by:",
+                    "sourceField": "doi_fundingReferences",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Publication Year:",
+                    "sourceField": "doi_publication_year",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Resource Type:",
+                    "sourceField": "doi_resource_type",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Version:",
+                    "sourceField": "doi_version_information",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Contributors:",
+                    "sourceField": "doi_contributors",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Related Identifiers:",
+                    "sourceField": "doi_relatedIdentifiers",
+                    "default": "Not specified"
+                  }
+                ]
+              },
+              {
+                "header": "Description",
+                "fields": [
+                  {
+                    "type": "block",
+                    "label": "Description:",
+                    "sourceField": "doi_descriptions",
+                    "default": "Not specified"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tabName": "Study",
+            "groups": [
+              {
+                "header": "Study Information",
+                "fields": [
+                  {
+                    "type": "text",
+                    "label": "Full Name:",
+                    "sourceField": "full_name",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Short Name:",
+                    "sourceField": "short_name",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Number Of Subjects:",
+                    "sourceField": "_subjects_count",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "dbGaP Accession Number:",
+                    "sourceField": "dbgap_accession",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "link",
+                    "label": "dbGaP URL:",
+                    "sourceField": "dbgap_url",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Released:",
+                    "sourceField": "released",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "tags"
+                  }
+                ]
+              },
+              {
+                "header": "Study Description",
+                "fields": [
+                  {
+                    "type": "block",
+                    "sourceField": "study_description"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tabName": "dbGaP FHIR",
+            "groups": [
+              {
+                "header": "Disclaimer",
+                "fields": [
+                  {
+                    "type": "block",
+                    "sourceField": "DBGAP_FHIR_Disclaimer",
+                    "default": "This information was retrieved from dbGaP's FHIR API for discoverability purposes and may not contain fully up-to-date information. Please refer to the official FHIR server for up-to-date FHIR data."
+                  },
+                  {
+                    "type": "link",
+                    "label": "dbGaP FHIR Research Study URL:",
+                    "sourceField": "DBGAP_FHIR_ResearchStudyURL",
+                    "default": "Not specified"
+                  }
+                ]
+              },
+              {
+                "header": "General Information",
+                "fields": [
+                  {
+                    "type": "text",
+                    "label": "Title:",
+                    "sourceField": "DBGAP_FHIR_Title",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "ID:",
+                    "sourceField": "DBGAP_FHIR_Id",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Focus:",
+                    "sourceField": "DBGAP_FHIR_Focus",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Identifier:",
+                    "sourceField": "DBGAP_FHIR_Identifier",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Category:",
+                    "sourceField": "DBGAP_FHIR_Category",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Status:",
+                    "sourceField": "DBGAP_FHIR_Status",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Release Date:",
+                    "sourceField": "DBGAP_FHIR_ReleaseDate",
+                    "default": "Not specified"
+                  }
+                ]
+              },
+              {
+                "header": "Counts",
+                "fields": [
+                  {
+                    "type": "text",
+                    "label": "Number of Samples:",
+                    "sourceField": "DBGAP_FHIR_NumSamples",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Number of Molecular Datasets:",
+                    "sourceField": "DBGAP_FHIR_NumMolecularDatasets",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Number Of Variables:",
+                    "sourceField": "DBGAP_FHIR_NumVariables",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Number of Subjects:",
+                    "sourceField": "DBGAP_FHIR_NumSubjects",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Number of Documents:",
+                    "sourceField": "DBGAP_FHIR_NumDocuments",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Number of Analyses:",
+                    "sourceField": "DBGAP_FHIR_NumAnalysis",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Number of Phenotype Datasets:",
+                    "sourceField": "DBGAP_FHIR_NumPhenotypeDatasets",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Number of Sub Studies:",
+                    "sourceField": "DBGAP_FHIR_NumSubStudies",
+                    "default": "Not specified"
+                  }
+                ]
+              },
+              {
+                "header": "Description",
+                "fields": [
+                  {
+                    "type": "block",
+                    "sourceField": "DBGAP_FHIR_Description"
+                  }
+                ]
+              },
+              {
+                "header": "Additional Information",
+                "fields": [
+                  {
+                    "type": "text",
+                    "label": "Conditions:",
+                    "sourceField": "DBGAP_FHIR_Condition",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Keywords:",
+                    "sourceField": "DBGAP_FHIR_Keyword",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "link",
+                    "label": "Study Overview URL:",
+                    "sourceField": "DBGAP_FHIR_StudyOverviewUrl",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Part Of:",
+                    "sourceField": "DBGAP_FHIR_PartOf",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Enrollment:",
+                    "sourceField": "DBGAP_FHIR_Enrollment",
+                    "default": "Not specified"
+                  },
+                  {
+                    "type": "text",
+                    "label": "Sponsor:",
+                    "sourceField": "DBGAP_FHIR_Sponsor",
+                    "default": "Not specified"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tabName": "Access",
+            "groups": [
+              {
+                "fields": [
+                  {
+                    "type": "accessDescriptor"
+                  }
+                ]
+              },
+              {
+                "header": "Study Access",
+                "fields": [
+                  {
+                    "type": "text",
+                    "sourceField": "study_data_requires_access_request",
+                    "label": "Study Data Requires Access Request"
+                  }
+                ]
               }
             ]
           }
@@ -230,21 +569,25 @@
       "tagsDisplayName": "Study Filters",
       "tagColumnWidth": "500px",
       "minimalFieldMapping": {
-        "authzField": "authz",
         "tagsListFieldName": "tags",
-        "dataAvailabilityField": "data_availability",
-        "uid": "_hdp_uid"
+        "authzField": "authz",
+        "uid": "study_id"
       },
       "tagCategories": [
         {
-          "name": "Condition",
-          "color": "#532565",
-          "display": false
+          "name": "Program",
+          "color": "rgba(129, 211, 248, 1)",
+          "display": true
+        },
+        {
+          "name": "Study Registration",
+          "color": "rgba(236, 128, 141, 1)",
+          "display": true
         },
         {
           "name": "Data Type",
-          "color": "#982568",
-          "display": false
+          "color": "rgba(112, 182, 3, 1)",
+          "display": true
         }
       ]
     }
