@@ -14,8 +14,7 @@
           },
           {
             "link": {
-              "href": "/explorer",
-              "linkType": "portal",
+              "href": "/Explorer",
               "text": "Explore NHLBI BioData Catalyst® Data"
             }
           }
