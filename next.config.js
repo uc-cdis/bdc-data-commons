@@ -21,6 +21,9 @@ const withMDX = require('@next/mdx')({
 
 // Next configuration with support for rewriting API to existing common services
 const nextConfig = {
+  env: {
+    version: process.env.npm_package_version
+  },
   reactStrictMode: true,
   experimental: {
     esmExternals: true,
