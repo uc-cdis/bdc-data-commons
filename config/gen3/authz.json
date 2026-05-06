@@ -3,10 +3,13 @@
     "/DataLibrary": {
       "loginRequired": true
     },
+    "/explorer": {
+      "loginRequired": true
+    },
     "/Workspace": {
       "loginRequired": true
     },
-    "/Profile": {
+    "/identity": {
       "loginRequired": true
     },
     "*": {

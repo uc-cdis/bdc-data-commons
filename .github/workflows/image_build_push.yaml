@@ -26,11 +26,7 @@ jobs:
         id: pick
         shell: bash
         run: |
-          if [ "${{ github.event.repository.fork }}" = "true" ]; then
             echo "DOCKERFILE_LOCATION=Dockerfile.production" >> "$GITHUB_OUTPUT"
-          else
-            echo "DOCKERFILE_LOCATION=Dockerfile.config" >> "$GITHUB_OUTPUT"
-          fi
 
   Security:
     name: Security Pipeline
@@ -46,6 +42,7 @@ jobs:
       - select_build
     uses: uc-cdis/.github/.github/workflows/image_build_push_native.yaml@master
     with:
+      USE_QUAY_ONLY: true
       DOCKERFILE_LOCATION: ${{ needs.select_build.outputs.DOCKERFILE_LOCATION }}
       OVERRIDE_TAG_NAME: ${{ needs.compute_tag.outputs.OVERRIDE_TAG_NAME }}
     secrets:

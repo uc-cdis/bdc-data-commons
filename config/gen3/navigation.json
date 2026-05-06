@@ -1,8 +1,8 @@
 {
   "navigation": {
     "logo": {
-      "src": "/ff/images/logo.png",
-      "height": 370,
+      "src": "/images/logo.png",
+      "height": 100,
       "width": 460,
       "href": "/",
       "noBasePath" : true,
@@ -11,18 +11,6 @@
       }
     },
     "items": [
-      {
-        "icon": "gen3:query",
-        "href": "/discovery",
-        "noBasePath": true,
-        "name": "Discovery",
-        "tooltip": "Use free-text search and tags to rapidly find relevant studies, discover new datasets across multiple resources, and easily export selected data files to the analysis workspace.",
-        "classNames": {
-          "root": "flex flex-col border-b-4 border-base-max hover:border-accent flex-nowrap py-4 pt-4 items-center pr-10 px-2",
-          "label": "text-black font-semibold  ",
-          "icon": "text-black"
-        }
-      },
       {
         "icon": "gen3:dictionary",
         "href": "/DD",
@@ -40,6 +28,18 @@
         "href": "/explorer",
         "noBasePath": true,
         "name": "Exploration",
+        "classNames": {
+          "root": "flex flex-col border-b-4 border-base-max hover:border-accent flex-nowrap py-4 pt-4 items-center pr-10 px-2",
+          "label": "text-black font-semibold  ",
+          "icon": "text-black"
+        }
+      },
+      {
+        "icon": "gen3:query",
+        "href": "/discovery",
+        "noBasePath": true,
+        "name": "Discovery",
+        "tooltip": "Use free-text search and tags to rapidly find relevant studies, discover new datasets across multiple resources, and easily export selected data files to the analysis workspace.",
         "classNames": {
           "root": "flex flex-col border-b-4 border-base-max hover:border-accent flex-nowrap py-4 pt-4 items-center pr-10 px-2",
           "label": "text-black font-semibold  ",

@@ -5,7 +5,8 @@ export { middleware } from './middleware-impl';
 export const config = {
   matcher: [
   "/DataLibrary",
+  "/explorer",
   "/Workspace",
-  "/Profile"
+  "/identity"
 ],
 };
