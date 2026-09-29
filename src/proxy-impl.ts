@@ -1,12 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getRouteConfig } from './lib/auth/arboristConfig';
-import {
-  getAccessToken,
-  getLoginStatus,
-  type LoginStatus,
-} from './lib/auth/getLoginStatus';
+import { getLoginStatus, type LoginStatus } from './lib/auth/getLoginStatus';
 import { fetchArboristResources } from './lib/auth/fetchAuthz';
-import { RouteConfig } from '@gen3/frontend/server';
+import type { RouteConfig } from '@gen3/frontend/server';
+import { getAccessToken } from '@gen3/frontend/server';
 
 const WILDCARD_ROUTE_KEY = '*';
 
@@ -18,9 +16,11 @@ function getRouteRuleForPath(pathname: string, routeConfig: RouteConfig) {
   if (pathParts.length > 2) {
     const startsWithPath = `/${pathParts[1]}`;
     // look through config for subdirectory
-    const routeConfigMatch = Object.keys(routeConfig).find(key => key.startsWith(startsWithPath));
+    const routeConfigMatch = Object.keys(routeConfig).find((key) =>
+      key.startsWith(startsWithPath),
+    );
     // check if subdirectory ends with wildcard
-    if (routeConfigMatch && routeConfigMatch.endsWith('(.*)')) {
+    if (routeConfigMatch?.endsWith('(.*)')) {
       return routeConfig?.[routeConfigMatch];
     }
   }
@@ -31,7 +31,7 @@ function isLoggedIn(loginStatus: LoginStatus) {
   return loginStatus.status === 'issued';
 }
 
-export async function middleware(req: NextRequest) {
+export async function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const { routes: routeConfig } = await getRouteConfig();
   let rule = getRouteRuleForPath(pathname, routeConfig);
@@ -47,34 +47,31 @@ export async function middleware(req: NextRequest) {
   }
 
   const loginRequired = rule.loginRequired ?? true;
-  const needsAuthz = Array.isArray(rule?.authz) && rule?.authz.length > 0;
+
+  if (!loginRequired) {
+    return NextResponse.next();
+  }
 
   // Gen3 login check
   const loginStatus = await getLoginStatus(req.headers.get('Cookie') || '');
-  const loggedIn = await isLoggedIn(loginStatus);
+  const loggedIn = isLoggedIn(loginStatus);
 
   // Enforce login if required
-  if (loginRequired && !loggedIn) {
-    const loginUrl = new URL('/Login', req.url);
+  if (!loggedIn) {
+    const loginUrl = req.nextUrl.clone();
+    loginUrl.pathname = '/Login';
     loginUrl.searchParams.set('referer', pathname);
     return NextResponse.redirect(loginUrl);
   }
+
+  const needsAuthz = Array.isArray(rule?.authz) && rule?.authz.length > 0;
 
   // If no authz resources configured, login is enough
   if (!needsAuthz) {
     return NextResponse.next();
   }
 
-  // if authz is required but we somehow aren't logged in,
-  // send to login (even though in practice loginRequired will almost
-  // always be true when authz is configured).
-  if (!loggedIn) {
-    const loginUrl = new URL('/Login', req.url);
-    loginUrl.searchParams.set('referer', pathname);
-    return NextResponse.redirect(loginUrl);
-  }
-
-  // Authz is enabled AND route has authzResources → check Arborist resources
+  // Authz is enabled, AND route has authzResources → check Arborist resources
   const tokenFromCookie =
     getAccessToken(req.headers.get('Cookie') || '') ?? null;
 
@@ -87,7 +84,14 @@ export async function middleware(req: NextRequest) {
   const allowed = rule?.authz!.some((needed) => resources.includes(needed));
   if (!allowed) {
     // Already logged in if required; they just lack authz for this resource
-    return NextResponse.redirect(new URL('/403', req.url));
+    const forbiddenUrl = req.nextUrl.clone();
+    // Ceck for 403 redirect
+    if (rule?.redirect403 ) {
+      return NextResponse.redirect(new URL(rule.redirect403, req.url));
+    }
+
+    forbiddenUrl.pathname = '/403';
+    return NextResponse.rewrite(forbiddenUrl);
   }
 
   return NextResponse.next();
