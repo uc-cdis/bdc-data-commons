@@ -76,6 +76,13 @@
       {
         "href": "https://bdcatalyst.gitbook.io/biodata-catalyst-documentation/explore_data/gen3-discovering-data",
         "name": "Documentation"
+      },
+      {
+        "rightIcon": "gen3:processing",
+        "modal": "jobModal",
+        "name": "Jobs",
+        "tooltip": "View and manage your data jobs",
+        "requireLogin": true
       }
     ],
     "classNames": {

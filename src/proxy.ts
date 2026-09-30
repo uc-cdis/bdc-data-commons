@@ -4,6 +4,7 @@ export { proxy } from './proxy-impl';
 
 export const config = {
   matcher: [
+  "/Explorer",
   "/DataLibrary",
   "/Workspace",
   "/Workspaces",

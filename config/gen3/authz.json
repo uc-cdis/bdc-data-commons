@@ -1,5 +1,8 @@
 {
   "routes": {
+    "/Explorer": {
+      "loginRequired": true
+    },
     "/DataLibrary": {
       "loginRequired": true
     },
