@@ -9,8 +9,6 @@ const { withJupyterWorkspaces } = require('@gen3/workspaces/server');
 
 dns.setDefaultResultOrder('ipv4first');
 
-const basePath = process.env.BASE_PATH || '';
-
 const isDev = process.env.NODE_ENV === 'development';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
