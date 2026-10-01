@@ -6,7 +6,7 @@
       "label": "Export: Terra",
       "rightIcon" : "gen3:send",
       "buttonLabel" : "Export",
-      "actionFunction" : "export-pfb-to-url",
+      "actionName" : "export-pfb-to-url",
       "parameters" : {
         "targetURLTemplate" : "https://terra.biodatacatalyst.nhlbi.nih.gov/#import-data?format=PFB&template=bdc&template=gen3&url={{PRESIGNED_URL}}"
       },
@@ -33,7 +33,7 @@
       "label": "Export: Seven Bridges",
       "rightIcon" : "gen3:send",
       "buttonLabel" : "Export",
-      "actionFunction" : "export-pfb-to-url",
+      "actionName" : "export-pfb-to-url",
       "parameters" : {
         "targetURLTemplate" : "https://platform.sb.biodatacatalyst.nhlbi.nih.gov/import/pfb?URL={{PRESIGNED_URL}}&source=bdc"
       },
@@ -55,5 +55,14 @@
         }
       ]
     }
-  ]
+  ],
+  "listActions": [{
+    "id": "exportListToPfb",
+    "label": "Export PFB",
+    "rightIcon" : "gen3:send",
+    "buttonLabel" : "Export",
+    "actionName" : "export-user-data-library",
+    "tooltip": "Export list to PFB"
+  }
+    ]
 }
