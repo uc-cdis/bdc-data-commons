@@ -1,22 +1,26 @@
-import App, { AppProps, AppContext, AppInitialProps } from 'next/app';
+import type { AppProps, AppContext, AppInitialProps } from 'next/app';
+import App from 'next/app';
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { MantineProvider, mergeThemeOverrides } from '@mantine/core';
 
+import type {
+  RegisteredIcons,
+  SessionConfiguration,
+  TenStringArray,
+  Fonts} from '@gen3/frontend';
 import {
   type AuthorizedRoutesConfig,
   createMantineTheme,
   DefaultAuthorizedRoutesConfig,
   Gen3Provider,
   type ModalsConfig,
+  registerBaseSowerActions,
   registerCohortBuilderDefaultPreviewRenderers,
+  registerCohortSowerActions,
   registerCohortDiscoveryApp,
-  RegisteredIcons,
   registerExplorerDefaultCellRenderers,
   registerMetadataSchemaApp,
   registerIGVApp,
-  SessionConfiguration,
-  TenStringArray,
-  Fonts,
 } from '@gen3/frontend';
 import { registerDefaultRemoteSupport, setDRSHostnames } from '@gen3/core';
 import { registerCohortTableCustomCellRenderers } from '@/lib/CohortBuilder/CustomCellRenderers';
@@ -82,52 +86,39 @@ const Gen3App = ({
       registerCohortBuilderDefaultPreviewRenderers();
       registerCohortTableCustomCellRenderers();
       registerCustomExplorerDetailsPanels();
+      registerBaseSowerActions();
+      registerCohortSowerActions();
       isFirstRender.current = false;
       const gen3ThemeDynamic = createMantineTheme(fonts, colors);
       const mergedTheme = mergeThemeOverrides(gen3ThemeDynamic);
       setMantineTheme(mergedTheme);
-      setMantineTheme(mergedTheme);
+      // oxlint-disable-next-line no-console
       console.log('Gen3 App initialized');
     }
   }, []);
 
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === 'undefined') {
-      setIsClient(false); // Only on client-side
-    }
-    else
-    setIsClient(true); // Only on client-side
-  }, []);
-
   return (
     <React.Fragment>
-      {isClient ? (
-        <Suspense fallback={<Loading />}>
-          {publicConfig?.dataDogAppId != null &&
-            publicConfig?.dataDogClientToken != null && (
-              <DatadogInit
-                appId={publicConfig.dataDogAppId}
-                clientToken={publicConfig.dataDogClientToken}
-                dataCommons={publicConfig.dataCommons}
-              />
-            )}
-          <MantineProvider theme={mantineTheme}>
-            <Gen3Provider
-              icons={icons}
-              sessionConfig={sessionConfig}
-              modalsConfig={modalsConfig}
-              protectedRoutesConfig={protectedRoutes}
-            >
-              <Component {...pageProps} />
-            </Gen3Provider>
-          </MantineProvider>
-        </Suspense>
-      ) : (
-        // Show some fallback UI while waiting for the client to load
-        <Loading />
-      )}
+      <Suspense fallback={<Loading />}>
+        {publicConfig?.dataDogAppId != null &&
+          publicConfig?.dataDogClientToken != null && (
+            <DatadogInit
+              appId={publicConfig.dataDogAppId}
+              clientToken={publicConfig.dataDogClientToken}
+              dataCommons={publicConfig.dataCommons}
+            />
+          )}
+        <MantineProvider theme={mantineTheme}>
+          <Gen3Provider
+            icons={icons}
+            sessionConfig={sessionConfig}
+            modalsConfig={modalsConfig}
+            protectedRoutesConfig={protectedRoutes}
+          >
+            <Component {...pageProps} />
+          </Gen3Provider>
+        </MantineProvider>
+      </Suspense>
     </React.Fragment>
   );
 };
