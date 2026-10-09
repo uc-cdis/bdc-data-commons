@@ -1,9 +1,18 @@
 {
   "routes": {
+    "/Explorer": {
+      "loginRequired": true
+    },
     "/DataLibrary": {
       "loginRequired": true
     },
     "/Workspace": {
+      "loginRequired": true
+    },
+    "/Workspaces": {
+      "loginRequired": true
+    },
+    "/WorkspaceRequestAccess": {
       "loginRequired": true
     },
     "/Profile": {
