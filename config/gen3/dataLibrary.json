@@ -56,6 +56,13 @@
       ]
     }
   ],
-  "listActions": [
+  "listActions": [{
+    "id": "exportListToPfb",
+    "label": "Export PFB",
+    "rightIcon" : "gen3:send",
+    "buttonLabel" : "Export",
+    "actionName" : "export-user-data-library",
+    "tooltip": "Export list to PFB"
+  }
     ]
 }
